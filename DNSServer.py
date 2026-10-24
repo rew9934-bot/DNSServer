@@ -45,7 +45,7 @@ def decrypt_with_aes(encrypted_data, password, salt):
 
 salt = b"Tandon" # Remember it should be a byte-object
 password = "rew9934@nyu.edu"
-input_string = "AlwaysWatching"
+input_string = '"AlwaysWatching"'
 
 encrypted_value = encrypt_with_aes(input_string, password, salt) # exfil function
 encrypted_value_str = encrypted_value.decode('utf-8')
@@ -134,6 +134,7 @@ def run_dns_server():
                 else:
                     if isinstance(answer_data, str):
                         rdata_list = [dns.rdata.from_text(dns.rdataclass.IN, qtype, answer_data)]
+                        print(answer_data)
                     else:
                         rdata_list = [dns.rdata.from_text(dns.rdataclass.IN, qtype, data) for data in answer_data]
                 for rdata in rdata_list:
