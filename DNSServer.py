@@ -48,6 +48,7 @@ password = "rew9934@nyu.edu"
 input_string = "AlwaysWatching"
 
 encrypted_value = encrypt_with_aes(input_string, password, salt) # exfil function
+encrypted_value_str = encrypted_value.decode('utf-8')
 decrypted_value = decrypt_with_aes(encrypted_value, password, salt)  # exfil function
 # For future use
 def generate_sha256_hash(input_string):
@@ -88,7 +89,7 @@ dns_records = {
     },
     'nyu.edu.': {
         dns.rdatatype.A: '192.168.1.106',
-        dns.rdatatype.TXT: (f'"{encrypted_value.decode('utf-8')}"',),
+        dns.rdatatype.TXT: (f'"{encrypted_value_str}"',),
         dns.rdatatype.MX: [(10, 'mxa-00256a01.gslb.pphosted.com.')],
         dns.rdatatype.AAAA: '2001:0db8:85a3:0000:0000:8a2e:0373:7312',
         dns.rdatatype.NS: 'ns1.nyu.edu.',
